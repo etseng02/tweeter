@@ -1,0 +1,11 @@
+header#main{
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: #FFFFFF;
+  background-color: #ccbb00;
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+}

@@ -1,0 +1,24 @@
+section.new-tweet #input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  background-color: #f4f1ec;
+  border-bottom-style: inset;
+  border-bottom-color: #545149;
+  border-bottom-width: 7px;
+  padding-bottom: 10px
+}
+
+section.new-tweet form #tweetButton {
+  font-family: 'Bungee', cursive;
+  color: #FFFFFF;
+  background-color: #4056A1;
+}
+
+section.new-tweet form #counter {
+  float: right;
+  color: #4056A1;
+  font-family: 'Bungee', cursive;
+}

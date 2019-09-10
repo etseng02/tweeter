@@ -1,0 +1,21 @@
+#logo {
+  font-size: 2em;
+  font-family: 'Bungee', cursive;
+}
+
+nav {
+  height: 150px;
+  z-index: 289;
+  color: #FFFFFF;
+  position: fixed;
+  background-color: #4056A1;
+  top: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  padding: 1.5em;
+}
+
+.newTweet {
+  float: right;
+}
