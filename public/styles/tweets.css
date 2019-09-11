@@ -2,7 +2,8 @@ article.tweetContainer {
   border-style: solid;
   border-color: #545149;
   border-width: 5px;
-  padding: 30px
+  padding: 30px;
+  margin-bottom: 30px; 
 }
 
 article.tweetContainer:hover {
