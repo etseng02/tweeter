@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     if (counter < 0) {
       console.log("The counter is less than zero!")
-      $('section.new-tweet form #counter').css({'color': 'red'});
+      $('section.new-tweet form #counter').css({'color': 'darkred'});
     } else if (counter >= 0) {
       console.log("The counter is higher than zerooooo")
       $('section.new-tweet form #counter').css({'color': '#4056A1'});

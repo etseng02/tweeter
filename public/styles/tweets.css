@@ -5,6 +5,15 @@ article.tweetContainer {
   padding: 30px
 }
 
+article.tweetContainer:hover {
+  text-shadow: 1px 1px;
+  color: #545149;
+  box-shadow: 10px 5px 5px;
+}
+
+article.tweetContainer:hover .tweetUsername{
+  color: #4056A1;
+}
 
 article.tweetContainer header.tweetHeader {
   display: flex;
@@ -12,11 +21,6 @@ article.tweetContainer header.tweetHeader {
   align-items: center;
   align-content: flex-start
 }
-
-/* div.tweetAvatar {
-display: flex;
-float: left;
-} */
 
 span.tweetName {
   margin-left:20px;
