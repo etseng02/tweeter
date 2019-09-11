@@ -7,9 +7,10 @@
 //let renderedPostsArray = [] //This is where the tweets will go before being rendered.
 const renderTweets = function(data) {
   for (tweets of data) {
-    //renderedPostsArray.push(tweets)
+    //let renderedPostsArray = [];
+    //renderedPostsArray.push(tweets);
     let $tweet = createTweetElement(tweets)
-    $('#allTweets').append($tweet);
+    $('#allTweets').prepend($tweet);
   }
 }
 
@@ -41,14 +42,14 @@ $(document).ready(function(){
       alert("You have exceeded 140 Characters!") 
     } else {
       
-      $.ajax({
-      url: "/tweets",
-      type: "POST",
-      data: $("form#new-tweet").serialize()
-    }).then(() => {
-
-    }
-    )
+      let tweet = $.ajax({
+        url: "/tweets",
+        type: "POST",
+        data: $("form#new-tweet").serialize()
+    })
+    .then((response) => {
+      loadMostRecentTweet();
+    })
     }
   })
 
@@ -59,11 +60,23 @@ $(document).ready(function(){
       dataType: 'JSON'
     })
       .then((response) => {
+        console.log(response);
       renderTweets(response);
     })
   }
 
+  const loadMostRecentTweet = () => {
+    $.ajax({
+      url: "http://localhost:8080/tweets/",
+      type: "GET",
+      dataType: 'JSON'
+    }) .then((response) => {
+      renderTweets([response[response.length-1]]);
+  })
+  }
+
   loadTweets();
+  
   
 });
 
