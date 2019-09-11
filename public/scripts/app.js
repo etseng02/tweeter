@@ -35,9 +35,7 @@ const renderTweets = function(data) {
     let $tweet = createTweetElement(tweets)
     $('#allTweets').append($tweet);
   }
-// loops through tweets
-// calls createTweetElement for each tweet
-// takes return value and appends it to the tweets container
+
 }
 
 const createTweetElement = function(tweet) {
@@ -61,6 +59,18 @@ return `<article class="tweetContainer">
 $(document).ready(function(){
   renderTweets(data);
 });
+
+const renderNewTweet = async () => {
+  event.preventDefault()
+  try {
+    console.log("hey there")
+  } catch (error) {
+    console.log("error")
+  }
+}
+
+
+
 
 {/* <article class="tweetContainer">
 <header class="tweetHeader">
