@@ -57,17 +57,78 @@ return `<article class="tweetContainer">
           </article> `
 }
 $(document).ready(function(){
-  renderTweets(data);
+  
+  //renderTweets(data);
+
+  $("form#new-tweet").submit(function(e) {
+    e.preventDefault()
+    $.ajax({
+      url: "/tweets",
+      type: "POST",
+      data: $("form#new-tweet").serialize()
+    }).then(() => {
+
+    })  
+  })
+
+  
+
+  const loadTweets = () => {
+      let tweets = $.ajax({
+        url: "http://localhost:8080/tweets/",
+        type: "GET",
+        dataType: 'JSON'
+      }).then((response) => {
+        renderTweets(response);
+    })
+  }
+
+  loadTweets();
+  
+
+
+
+
 });
 
-const renderNewTweet = async () => {
-  event.preventDefault()
-  try {
-    console.log("hey there")
-  } catch (error) {
-    console.log("error")
-  }
-}
+// const renderNewTweet = async (event) => {
+//   event.preventDefault()
+//   try {
+//     let string = $("#input").val()
+
+//     const response = await $.ajax ({
+//       url: 'http://localhost:8080/tweets',
+//       method: 'POST',
+//       data: JSON.stringify({
+//         user: 
+//           {
+//             name: "testUser",
+//             avatars: "",
+//             handle: "testtesttest"
+//           },
+//         content: 
+//           {
+//             "text": string
+//           },
+//         "created_at": 1461113959088
+//       })
+//     })
+
+//     console.log(response);
+
+
+//     // const response = await $.ajax({
+//     //   url: `/public/`,
+//     //   type: 'GET',
+//     //   dataType: 'JSON'
+//     // })
+
+//     //console.log (response)
+
+//   } catch (error) {
+//     console.log("error")
+//   }
+// }
 
 
 
