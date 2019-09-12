@@ -59,7 +59,6 @@ const loadTweets = () => {
     dataType: 'JSON'
   })
     .then((response) => {
-      console.log(response);
       renderTweets(response);
     });
 };
