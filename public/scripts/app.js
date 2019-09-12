@@ -2,27 +2,20 @@ const escape =  function(str) {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
-}
+};
 
 const renderTweets = function(data) {
-  for (tweets of data) {
-    console.log (tweets.created_at)
-    console.log (Date.now)
-    console.log((Date.now - tweets.created_at))
-    //let daysAgo = new Date(tweets.created_at);
-    let daysAgo = (Math.round((Date.now() - tweets.created_at) / (60*60*24*1000)));
-    let $tweet = createTweetElement(tweets, daysAgo)
+  for (let tweets of data) {
+    // Calculate the date day in miliseconds - the date of when the date was created at
+    let daysAgo = (Math.round((Date.now() - tweets.created_at) / (60 * 60 * 24 * 1000)));
+    let $tweet = createTweetElement(tweets, daysAgo);
     $('#allTweets').prepend($tweet);
   }
-}
+};
 
 const createTweetElement = function(tweet, daysAgo) {
 
-  // let d = Date(Date.now());
-  // d.toString()
-
-
-return `<article class="tweetContainer">
+  return `<article class="tweetContainer">
           <header class="tweetHeader">
             <img src=${escape(tweet.user.avatars)}> 
             <span class="tweetName">${escape(tweet.user.name)}</span>
@@ -35,89 +28,93 @@ return `<article class="tweetContainer">
             <span class = "retweet"><i class="fas fa-retweet"></i></i></span>
             <span class = "flag"><i class="fas fa-flag"></i></span>
           </footer>
-          </article> `
-}
+          </article> `;
+          
+};
 
 const characterLimitError = function() {
-  return `<span id = "errorMessage">You have exceeded 140 characters!</span>`
-}
+  return `<span id = "errorMessage">You have exceeded 140 characters!</span>`;
+};
 
 const nullValueError = function() {
-  return `<span id = "errorMessage">You cannot tweet an empty tweet!</span>`
-}
+  return `<span id = "errorMessage">You cannot tweet an empty tweet!</span>`;
+};
 
-const displayErrorMessage = function (message) {
-  $('.errorCode').append(message)
+// Displays error messages with slide animation
+const displayErrorMessage = function(message) {
+  $('.errorCode').append(message);
   $('#errorMessage').slideDown();
-  $('#errorMessage').css({"display": "flex"})
-}
+  $('#errorMessage').css({"display": "flex"});
+};
 
-const removeErrorMessage = function(){
+const removeErrorMessage = function() {
   $('#errorMessage').remove();
-  $('#errorMessage').css({"display": "none"})
-}
+  $('#errorMessage').css({"display": "none"});
+};
 
 const loadTweets = () => {
-  let tweets = $.ajax({
+  $.ajax({
     url: "http://localhost:8080/tweets/",
     type: "GET",
     dataType: 'JSON'
   })
     .then((response) => {
       console.log(response);
-    renderTweets(response);
-  })
-}
+      renderTweets(response);
+    });
+};
 
 const loadMostRecentTweet = () => {
   $.ajax({
     url: "http://localhost:8080/tweets/",
     type: "GET",
     dataType: 'JSON'
-  }) .then((response) => {
-    renderTweets([response[response.length-1]]);
   })
-}
+    .then((response) => {
+      renderTweets([response[response.length - 1]]);
+    });
+};
 
-$(document).ready(function(){
+$(document).ready(function() {
   
   //On Tweet Button click, run this function
   $("form#new-tweet").submit(function(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     // First remove any existing error messages
     removeErrorMessage();
 
     //Validate to see if user input is not empty or over 140 characters
     if ($("#input").val() === "" || $("#input").val() === null) {
-      let message = nullValueError()
-      displayErrorMessage(message)
+      let message = nullValueError();
+      displayErrorMessage(message);
     } else if ($("#input").val().length > 140) {
-      let message = characterLimitError()
-      displayErrorMessage(message)
+      let message = characterLimitError();
+      displayErrorMessage(message);
     } else {
-
+      // After validation, post textbox input to /tweets
       $.ajax({
         url: "/tweets",
         type: "POST",
         data: $("form#new-tweet").serialize()
-
-    })
-    .then(() => {
-      loadMostRecentTweet();
-    })
-    .then(() => {
-      $('#errorMessage').remove();
-    })
+      })
+      //Load the most recent tweet and render that specific tweet and append to the top without re-rendering every other tweet
+        .then(() => {
+          loadMostRecentTweet();
+        })
+        .then(() => {
+          $('#errorMessage').remove();
+        });
     }
-  })
+  });
 
-  
-  $('div.newTweetButton').on('click', function(){
+  // On clock of the new tweet button, remove any previous error messages
+  $('div.newTweetButton').on('click', function() {
     $('#errorMessage').remove();
     $('section.new-tweet').toggle();
   });
 
+  //load initial tweets after document is ready to receive input
   loadTweets();
   
 });
