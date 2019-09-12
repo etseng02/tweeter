@@ -1,21 +1,11 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
-//let renderedPostsArray = [] //This is where the tweets will go before being rendered.
 const escape =  function(str) {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
-
 const renderTweets = function(data) {
   for (tweets of data) {
-    //let renderedPostsArray = [];
-    //renderedPostsArray.push(tweets);
     let $tweet = createTweetElement(tweets)
     $('#allTweets').prepend($tweet);
   }
@@ -46,27 +36,62 @@ const nullValueError = function() {
   return `<span id = "errorMessage">You cannot tweet an empty tweet!</span>`
 }
 
+const displayErrorMessage = function (message) {
+  $('.errorCode').append(message)
+  $('#errorMessage').slideDown();
+  $('#errorMessage').css({"display": "flex"})
+}
+
+const removeErrorMessage = function(){
+  $('#errorMessage').remove();
+  $('#errorMessage').css({"display": "none"})
+}
+
+const loadTweets = () => {
+  let tweets = $.ajax({
+    url: "http://localhost:8080/tweets/",
+    type: "GET",
+    dataType: 'JSON'
+  })
+    .then((response) => {
+      console.log(response);
+    renderTweets(response);
+  })
+}
+
+const loadMostRecentTweet = () => {
+  $.ajax({
+    url: "http://localhost:8080/tweets/",
+    type: "GET",
+    dataType: 'JSON'
+  }) .then((response) => {
+    renderTweets([response[response.length-1]]);
+  })
+}
 
 $(document).ready(function(){
-
+  
+  //On Tweet Button click, run this function
   $("form#new-tweet").submit(function(e) {
     e.preventDefault()
+
+    // First remove any existing error messages
+    removeErrorMessage();
+
+    //Validate to see if user input is not empty or over 140 characters
     if ($("#input").val() === "" || $("#input").val() === null) {
-      let $tweet = nullValueError()
-      $('#errorMessage').remove();
-      $('.errorCode').append($tweet)
+      let message = nullValueError()
+      displayErrorMessage(message)
     } else if ($("#input").val().length > 140) {
-      let $tweet = characterLimitError()
-      $('#errorMessage').remove();
-      $('#errorMessage').css({"display": "none"})
-      $('.errorCode').append($tweet)
-      $('#errorMessage').slideDown();
-      $('#errorMessage').css({"display": "flex"})
+      let message = characterLimitError()
+      displayErrorMessage(message)
     } else {
-      let tweet = $.ajax({
+
+      $.ajax({
         url: "/tweets",
         type: "POST",
         data: $("form#new-tweet").serialize()
+
     })
     .then(() => {
       loadMostRecentTweet();
@@ -77,35 +102,13 @@ $(document).ready(function(){
     }
   })
 
-  const loadTweets = () => {
-    let tweets = $.ajax({
-      url: "http://localhost:8080/tweets/",
-      type: "GET",
-      dataType: 'JSON'
-    })
-      .then((response) => {
-        console.log(response);
-      renderTweets(response);
-    })
-  }
-
-  const loadMostRecentTweet = () => {
-    $.ajax({
-      url: "http://localhost:8080/tweets/",
-      type: "GET",
-      dataType: 'JSON'
-    }) .then((response) => {
-      renderTweets([response[response.length-1]]);
-  })
-  }
-
+  
   $('div.newTweetButton').on('click', function(){
     $('#errorMessage').remove();
     $('section.new-tweet').toggle();
   });
 
   loadTweets();
-  
   
 });
 
