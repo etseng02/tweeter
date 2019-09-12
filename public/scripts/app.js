@@ -100,7 +100,7 @@ $(document).ready(function() {
       //Load the most recent tweet and render that specific tweet and append to the top without re-rendering every other tweet
         .then(() => {
           loadMostRecentTweet();
-          $('#input').val("")
+          $('#input').val("");
         })
         .then(() => {
           $('#errorMessage').remove();
@@ -113,7 +113,7 @@ $(document).ready(function() {
     $('#errorMessage').remove();
     //$('section.new-tweet').slideDown();
     $('section.new-tweet').slideToggle();
-    $('#input').focus()
+    $('#input').focus();
   });
 
   //load initial tweets after document is ready to receive input
