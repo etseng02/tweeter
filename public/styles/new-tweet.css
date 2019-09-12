@@ -8,7 +8,11 @@ section.new-tweet #input {
   border-bottom-style: inset;
   border-bottom-color: #545149;
   border-bottom-width: 7px;
-  padding-bottom: 10px
+  padding-bottom: 10px;
+}
+
+section.new-tweet {
+  display: none;
 }
 
 section.new-tweet form #tweetButton {
