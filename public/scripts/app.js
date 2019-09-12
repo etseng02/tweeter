@@ -38,17 +38,28 @@ return `<article class="tweetContainer">
           </article> `
 }
 
+const characterLimitError = function() {
+  return `<span id = "errorMessage">You have exceeded 140 characters!</span>`
+}
+
+const nullValueError = function() {
+  return `<span id = "errorMessage">You cannot tweet an empty tweet!</span>`
+}
+
 
 $(document).ready(function(){
 
   $("form#new-tweet").submit(function(e) {
     e.preventDefault()
     if ($("#input").val() === "" || $("#input").val() === null) {
-      alert("Please type in a tweet!")
+      let $tweet = nullValueError()
+      $('#errorMessage').remove();
+      $('.errorCode').append($tweet)
     } else if ($("#input").val().length > 140) {
-      alert("You have exceeded 140 Characters!") 
+      let $tweet = characterLimitError()
+      $('#errorMessage').remove();
+      $('.errorCode').append($tweet)
     } else {
-      
       let tweet = $.ajax({
         url: "/tweets",
         type: "POST",
@@ -56,6 +67,9 @@ $(document).ready(function(){
     })
     .then(() => {
       loadMostRecentTweet();
+    })
+    .then(() => {
+      $('#errorMessage').remove();
     })
     }
   })
@@ -83,6 +97,7 @@ $(document).ready(function(){
   }
 
   $('div.newTweetButton').on('click', function(){
+    $('#errorMessage').remove();
     $('section.new-tweet').toggle();
   });
 
