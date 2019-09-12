@@ -43,7 +43,7 @@ const nullValueError = function() {
 // Displays error messages with slide animation
 const displayErrorMessage = function(message) {
   $('.errorCode').append(message);
-  $('#errorMessage').slideDown();
+  $('#errorMessage').slideToggle();
   $('#errorMessage').css({"display": "flex"});
 };
 
@@ -110,7 +110,8 @@ $(document).ready(function() {
   // On clock of the new tweet button, remove any previous error messages
   $('div.newTweetButton').on('click', function() {
     $('#errorMessage').remove();
-    $('section.new-tweet').toggle();
+    //$('section.new-tweet').slideDown();
+    $('section.new-tweet').slideToggle();
     $('#input').focus()
   });
 
