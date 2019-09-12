@@ -100,6 +100,7 @@ $(document).ready(function() {
       //Load the most recent tweet and render that specific tweet and append to the top without re-rendering every other tweet
         .then(() => {
           loadMostRecentTweet();
+          $('#input').val("")
         })
         .then(() => {
           $('#errorMessage').remove();
