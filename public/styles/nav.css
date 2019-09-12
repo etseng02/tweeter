@@ -16,6 +16,24 @@ nav {
   padding: 1.5em;
 }
 
-.newTweet {
+#newTweetText{
   float: right;
 }
+
+div.newTweetButton{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  float: right;
+  align-items: center;
+}
+
+span#downArrow {
+  color: orangered;
+}
+
+div.newTweetButton:hover #downArrow{
+  
+}
+
+

@@ -5,6 +5,13 @@
  */
 
 //let renderedPostsArray = [] //This is where the tweets will go before being rendered.
+const escape =  function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+
 const renderTweets = function(data) {
   for (tweets of data) {
     //let renderedPostsArray = [];
@@ -17,13 +24,13 @@ const renderTweets = function(data) {
 const createTweetElement = function(tweet) {
 return `<article class="tweetContainer">
           <header class="tweetHeader">
-            <img src=${tweet.user.avatars}> 
-            <span class="tweetName">${tweet.user.name}</span>
-            <span class ="tweetUsername">${tweet.user.handle}</span>
+            <img src=${escape(tweet.user.avatars)}> 
+            <span class="tweetName">${escape(tweet.user.name)}</span>
+            <span class ="tweetUsername">${escape(tweet.user.handle)}</span>
           </header>
-          <p class = 'tweet'>${tweet.content.text}</p>
+          <p class = 'tweet'>${escape(tweet.content.text)}</p>
           <footer>
-            <span>${tweet.created_at} days ago</span>
+            <span>${escape(tweet.created_at)} days ago</span>
             <span class = "heart"><i class="fas fa-heart"></i></i></span>
             <span class = "retweet"><i class="fas fa-retweet"></i></i></span>
             <span class = "flag"><i class="fas fa-flag"></i></span>
@@ -47,7 +54,7 @@ $(document).ready(function(){
         type: "POST",
         data: $("form#new-tweet").serialize()
     })
-    .then((response) => {
+    .then(() => {
       loadMostRecentTweet();
     })
     }
@@ -74,6 +81,10 @@ $(document).ready(function(){
       renderTweets([response[response.length-1]]);
   })
   }
+
+  $('div.newTweetButton').on('click', function(){
+    $('section.new-tweet').toggle();
+  });
 
   loadTweets();
   

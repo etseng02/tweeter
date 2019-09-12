@@ -3,7 +3,8 @@ article.tweetContainer {
   border-color: #545149;
   border-width: 5px;
   padding: 30px;
-  margin-bottom: 30px; 
+  margin-top: 15px;
+  margin-bottom: 15px; 
 }
 
 article.tweetContainer:hover {
