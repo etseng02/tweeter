@@ -1,10 +1,10 @@
 #errorMessage {
-  display:flex;
+  display:none;
   float: center;
   border-style: solid;
   border-color:orangered;
   border-width: 5px;
   padding: 30px;
   margin-top: 15px;
-  color: orangered
+  color: orangered;
 }

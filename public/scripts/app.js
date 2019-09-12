@@ -58,7 +58,10 @@ $(document).ready(function(){
     } else if ($("#input").val().length > 140) {
       let $tweet = characterLimitError()
       $('#errorMessage').remove();
+      $('#errorMessage').css({"display": "none"})
       $('.errorCode').append($tweet)
+      $('#errorMessage').slideDown();
+      $('#errorMessage').css({"display": "flex"})
     } else {
       let tweet = $.ajax({
         url: "/tweets",
