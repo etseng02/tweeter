@@ -111,6 +111,7 @@ $(document).ready(function() {
   $('div.newTweetButton').on('click', function() {
     $('#errorMessage').remove();
     $('section.new-tweet').toggle();
+    $('#input').focus()
   });
 
   //load initial tweets after document is ready to receive input
