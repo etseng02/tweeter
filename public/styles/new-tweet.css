@@ -1,4 +1,4 @@
-section.new-tweet #input {
+section.composeNewTweet #input {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -11,17 +11,17 @@ section.new-tweet #input {
   padding-bottom: 10px;
 }
 
-section.new-tweet {
+section.composeNewTweet {
   display: none;
 }
 
-section.new-tweet form #tweetButton {
+section.composeNewTweet form #tweetButton {
   font-family: 'Bungee', cursive;
   color: #FFFFFF;
   background-color: #4056A1;
 }
 
-section.new-tweet form #counter {
+section.composeNewTweet form #counter {
   float: right;
   color: #4056A1;
   font-family: 'Bungee', cursive;

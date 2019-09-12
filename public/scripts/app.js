@@ -111,8 +111,7 @@ $(document).ready(function() {
   // On clock of the new tweet button, remove any previous error messages
   $('div.newTweetButton').on('click', function() {
     $('#errorMessage').remove();
-    //$('section.new-tweet').slideDown();
-    $('section.new-tweet').slideToggle();
+    $('section.composeNewTweet').slideToggle();
     $('#input').focus();
   });
 

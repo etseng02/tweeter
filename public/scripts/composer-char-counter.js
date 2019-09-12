@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
-  $("section form #input").keyup(function(event) {
+  $("section form #input").keyup(function() {
     let string = $("#input").val()
     let counter = 140 - string.length;
 
     if (counter < 0) {
-      $('section.new-tweet form #counter').css({'color': 'darkred'});
+      $('section.composeNewTweet form #counter').css({'color': 'darkred'});
     } else if (counter >= 0) {
-      $('section.new-tweet form #counter').css({'color': '#4056A1'});
+      $('section.composeNewTweet form #counter').css({'color': '#4056A1'});
     }
     $('#counter').text(counter);
 
