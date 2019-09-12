@@ -6,12 +6,22 @@ const escape =  function(str) {
 
 const renderTweets = function(data) {
   for (tweets of data) {
-    let $tweet = createTweetElement(tweets)
+    console.log (tweets.created_at)
+    console.log (Date.now)
+    console.log((Date.now - tweets.created_at))
+    //let daysAgo = new Date(tweets.created_at);
+    let daysAgo = (Math.round((Date.now() - tweets.created_at) / (60*60*24*1000)));
+    let $tweet = createTweetElement(tweets, daysAgo)
     $('#allTweets').prepend($tweet);
   }
 }
 
-const createTweetElement = function(tweet) {
+const createTweetElement = function(tweet, daysAgo) {
+
+  // let d = Date(Date.now());
+  // d.toString()
+
+
 return `<article class="tweetContainer">
           <header class="tweetHeader">
             <img src=${escape(tweet.user.avatars)}> 
@@ -20,7 +30,7 @@ return `<article class="tweetContainer">
           </header>
           <p class = 'tweet'>${escape(tweet.content.text)}</p>
           <footer>
-            <span>${escape(tweet.created_at)} days ago</span>
+            <span>${daysAgo} days ago</span>
             <span class = "heart"><i class="fas fa-heart"></i></i></span>
             <span class = "retweet"><i class="fas fa-retweet"></i></i></span>
             <span class = "flag"><i class="fas fa-flag"></i></span>
@@ -111,59 +121,3 @@ $(document).ready(function(){
   loadTweets();
   
 });
-
-// const renderNewTweet = async (event) => {
-//   event.preventDefault()
-//   try {
-//     let string = $("#input").val()
-
-//     const response = await $.ajax ({
-//       url: 'http://localhost:8080/tweets',
-//       method: 'POST',
-//       data: JSON.stringify({
-//         user: 
-//           {
-//             name: "testUser",
-//             avatars: "",
-//             handle: "testtesttest"
-//           },
-//         content: 
-//           {
-//             "text": string
-//           },
-//         "created_at": 1461113959088
-//       })
-//     })
-
-//     console.log(response);
-
-
-//     // const response = await $.ajax({
-//     //   url: `/public/`,
-//     //   type: 'GET',
-//     //   dataType: 'JSON'
-//     // })
-
-//     //console.log (response)
-
-//   } catch (error) {
-//     console.log("error")
-//   }
-// }
-
-{/* <article class="tweetContainer">
-<header class="tweetHeader">
-    <img src="https://i.imgur.com/73hZDYK.png"> 
-    <span class="tweetName">Newton</span>
-    <span class ="tweetUsername">@newnewton</span>
-</header>
-
-<p class = 'tweet'>If I have seen further it is by standing on the shoulders of giants</p>
-<footer>
-<span>Seen 10 days ago</span>
-<span class = "heart"><i class="fas fa-heart"></i></i></span>
-<span class = "retweet"><i class="fas fa-retweet"></i></i></span>
-<span class = "flag"><i class="fas fa-flag"></i></span>
-</footer>
-
-</article> */}
