@@ -18,6 +18,8 @@ This repository is the starter code for the project: Students will fork and clon
 - chance
 - body-parser
 
+## Final Product
+
 This is how the main page of the tweeter app will look like.
 !["Screenshot of main page"](https://github.com/etseng02/tweeter/blob/master/Docs/Tweeter%201.png)
 
