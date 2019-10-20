@@ -1,11 +1,29 @@
-header#main{
-  margin-top: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 400px;
-  color: #FFFFFF;
-  background-color: #ccbb00;
-  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+@media (max-width: 1024px) {
+  header#main{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    color: #FFFFFF;
+    background-color: #ccbb00;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+  }
+}
+
+@media (min-width: 1024px) {
+  header#main{
+    float: left;
+    margin: 1rem;
+    margin-top: 10rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 400px;
+    color: #FFFFFF;
+    background-color: #ccbb00;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    width: 40%;
+  }
 }
